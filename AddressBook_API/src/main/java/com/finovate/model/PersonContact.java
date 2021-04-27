@@ -1,5 +1,7 @@
 package com.finovate.model;
 
+import com.finovate.dto.ContactDTO;
+
 public class PersonContact {
 	private int contactBookId;
 	private String firstName;
@@ -11,13 +13,13 @@ public class PersonContact {
 											//no argument constructor
 	}
 
-	public PersonContact(int contactBookId, String firstName, String lastName, String emailId, String mobileNumber) {  //argument constructor
-		super();
+	public PersonContact(int contactBookId, ContactDTO contactDTO ) {  //argument constructor
+		
 		this.contactBookId = contactBookId;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.emailId = emailId;
-		this.mobileNumber = mobileNumber;
+		this.firstName = contactDTO.firstName;
+		this.lastName = contactDTO.lastName;
+		this.emailId = contactDTO.emailId;
+		this.mobileNumber = contactDTO.mobileNumber;
 	}
 
 	public int getContactBookId() {

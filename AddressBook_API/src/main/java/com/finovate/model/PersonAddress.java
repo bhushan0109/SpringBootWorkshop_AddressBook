@@ -1,24 +1,27 @@
 package com.finovate.model;
 
+import com.finovate.dto.AddressDTO;
+
 public class PersonAddress {
 	private int AddessBookId;
 	private String address;
 	private String city; 								// variable and fields of person address
 	private String state;
-	private String zipCode;
+	private long zipCode;
 
 	public PersonAddress() {
 		
 	}
 
-	public PersonAddress(int addessBookId, String address, String city, String state, String zipCode) {
-		super();
-		AddessBookId = addessBookId;
-		this.address = address;
-		this.city = city;
-		this.state = state;
-		this.zipCode = zipCode;
+	public PersonAddress(int addessBookId, AddressDTO addressDTO) {
+		
+		this.AddessBookId = addessBookId;
+		this.address = addressDTO.address;
+		this.city = addressDTO.city;
+		this.state = addressDTO.state;
+		this.zipCode = addressDTO.zipCode;
 	}
+
 
 	public int getAddessBookId() {
 		return AddessBookId;
@@ -52,11 +55,11 @@ public class PersonAddress {
 		this.state = state;
 	}
 
-	public String getZipCode() {
+	public long getZipCode() {
 		return zipCode;
 	}
 
-	public void setZipCode(String zipCode) {
+	public void setZipCode(long zipCode) {
 		this.zipCode = zipCode;
 	}
 
