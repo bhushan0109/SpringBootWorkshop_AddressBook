@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -41,6 +42,13 @@ public class PersonContactController {
 	public ResponseEntity<ResponseDTO> getContactById(@PathVariable("contId") int contId) {
 		PersonContactData personData = contactService.getContactById(contId);
 		ResponseDTO responseDTO = new ResponseDTO("Successfully got the data ", personData);
+		return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
+	}
+	@PutMapping("/update/{contId}")
+	public ResponseEntity<ResponseDTO> updateContactData(@PathVariable("contId") int contId,
+			@RequestBody ContactDTO contactDTO) {
+		PersonContactData personData = contactService.updateContactData(contId, contactDTO);
+		ResponseDTO responseDTO = new ResponseDTO("Updated address book of Id : ", personData);
 		return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
 	}
 }
