@@ -37,6 +37,12 @@ public class ContractService implements IContactService {
 		return contactData;
 	}
 
+	@Override
+	public void deletPersonDataByid(int contId) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 
 }

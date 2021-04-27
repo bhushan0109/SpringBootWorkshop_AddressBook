@@ -15,4 +15,6 @@ public interface IContactService {
 
 	PersonContactData updateContactData(int contId, ContactDTO contctDTO);
 
+	void deletPersonDataByid(int contId);
+
 }
