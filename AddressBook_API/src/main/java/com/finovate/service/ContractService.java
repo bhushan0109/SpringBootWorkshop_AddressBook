@@ -23,4 +23,12 @@ public class ContractService implements IContactService {
 		return personList;
 	}
 
+	@Override
+	public PersonContactData getContactById(int Id) {
+
+		PersonContactData contactData = new PersonContactData(1,
+				new ContactDTO("raj", "patil", "rahul@gmail.com", "876554568"));
+		return contactData;
+	}
+
 }
