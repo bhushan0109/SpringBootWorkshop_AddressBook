@@ -13,4 +13,6 @@ public interface IContactService {
 
 	PersonContactData getContactById(int Id);
 
+	PersonContactData updateContactData(int contId, ContactDTO contctDTO);
+
 }

@@ -31,4 +31,12 @@ public class ContractService implements IContactService {
 		return contactData;
 	}
 
+	@Override
+	public PersonContactData updateContactData(int contId, ContactDTO contctDTO) {
+		PersonContactData contactData = new PersonContactData(1, contctDTO);
+		return contactData;
+	}
+
+	
+
 }
