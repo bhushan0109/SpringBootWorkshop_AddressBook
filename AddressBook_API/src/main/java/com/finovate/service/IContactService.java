@@ -1,5 +1,8 @@
 package com.finovate.service;
 
-public interface IContactService {
+import com.finovate.dto.ContactDTO;
+import com.finovate.model.PersonContactData;
 
+public interface IContactService {
+	PersonContactData createPersonData(ContactDTO contctDTO);
 }
