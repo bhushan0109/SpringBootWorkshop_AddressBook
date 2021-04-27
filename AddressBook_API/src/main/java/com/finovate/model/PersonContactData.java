@@ -2,18 +2,18 @@ package com.finovate.model;
 
 import com.finovate.dto.ContactDTO;
 
-public class PersonContact {
+public class PersonContactData {
 	private int contactBookId;
 	private String firstName;
 	private String lastName;				//variable and fields of contact person 
 	private String emailId;
 	private String mobileNumber;
 
-	public PersonContact() {
+	public PersonContactData() {
 											//no argument constructor
 	}
 
-	public PersonContact(int contactBookId, ContactDTO contactDTO ) {  //argument constructor
+	public PersonContactData(int contactBookId, ContactDTO contactDTO ) {  //argument constructor
 		
 		this.contactBookId = contactBookId;
 		this.firstName = contactDTO.firstName;

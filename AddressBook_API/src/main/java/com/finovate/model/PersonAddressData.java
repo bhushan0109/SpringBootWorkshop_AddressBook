@@ -2,18 +2,18 @@ package com.finovate.model;
 
 import com.finovate.dto.AddressDTO;
 
-public class PersonAddress {
+public class PersonAddressData {
 	private int AddessBookId;
 	private String address;
 	private String city; 								// variable and fields of person address
 	private String state;
 	private long zipCode;
 
-	public PersonAddress() {
+	public PersonAddressData() {
 		
 	}
 
-	public PersonAddress(int addessBookId, AddressDTO addressDTO) {
+	public PersonAddressData(int addessBookId, AddressDTO addressDTO) {
 		
 		this.AddessBookId = addessBookId;
 		this.address = addressDTO.address;
