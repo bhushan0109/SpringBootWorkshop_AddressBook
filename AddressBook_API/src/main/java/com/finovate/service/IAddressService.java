@@ -13,4 +13,6 @@ public interface IAddressService {
 
 	PersonAddressData getAddresById(int Id);
 
+	PersonAddressData updatePersonAdresssData(int contId, AddressDTO addressDTO);
+
 }

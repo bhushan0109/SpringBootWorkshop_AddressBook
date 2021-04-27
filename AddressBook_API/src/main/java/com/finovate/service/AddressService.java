@@ -20,15 +20,22 @@ public class AddressService implements IAddressService {
 	@Override
 	public List<PersonAddressData> getPersonAddressData() {
 		List<PersonAddressData> addressList = new ArrayList<PersonAddressData>();
-		addressList.add(new PersonAddressData(1, new AddressDTO("plot no12", "shimla", "delhi", 234567)));
+		addressList.add(new PersonAddressData(1, new AddressDTO("plot no 12", "shimla", "delhi", 234567)));
 		return addressList;
 	}
 
 	@Override
 	public PersonAddressData getAddresById(int Id) {
 
-		PersonAddressData addressData = new PersonAddressData(1, new AddressDTO("plot no14", "mumbai", "mh", 567866));
+		PersonAddressData addressData = new PersonAddressData(1, new AddressDTO("plot no 14", "mumbai", "mh", 567866));
 		return addressData;
 
+	}
+
+	@Override
+
+	public PersonAddressData updatePersonAdresssData(int contId, AddressDTO addressDTO) {
+		PersonAddressData addressData = new PersonAddressData(1, addressDTO);
+		return addressData;
 	}
 }
