@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,6 +34,13 @@ public class PersonContactController {
 	public ResponseEntity<ResponseDTO> getPersonData() {
 		List<PersonContactData> personData = contactService.getPersonData();
 		ResponseDTO responseDTO = new ResponseDTO("Successfull got the data", personData);
+		return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
+	}
+
+	@GetMapping("/get/{contId}")
+	public ResponseEntity<ResponseDTO> getContactById(@PathVariable("contId") int contId) {
+		PersonContactData personData = contactService.getContactById(contId);
+		ResponseDTO responseDTO = new ResponseDTO("Successfully got the data ", personData);
 		return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
 	}
 }
