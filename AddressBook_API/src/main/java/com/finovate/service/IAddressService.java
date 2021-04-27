@@ -11,4 +11,6 @@ public interface IAddressService {
 
 	List<PersonAddressData> getPersonAddressData();
 
+	PersonAddressData getAddresById(int Id);
+
 }

@@ -24,4 +24,11 @@ public class AddressService implements IAddressService {
 		return addressList;
 	}
 
+	@Override
+	public PersonAddressData getAddresById(int Id) {
+
+		PersonAddressData addressData = new PersonAddressData(1, new AddressDTO("plot no14", "mumbai", "mh", 567866));
+		return addressData;
+
+	}
 }
