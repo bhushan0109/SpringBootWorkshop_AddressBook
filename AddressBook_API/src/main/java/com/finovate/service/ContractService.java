@@ -3,6 +3,7 @@ package com.finovate.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +26,7 @@ public class ContractService implements IContactService {
 		PersonContactData contactData = new PersonContactData(contactDTO);
 
 		return contactRepository.save(contactData);
+
 	}
 
 	@Override
@@ -36,7 +38,6 @@ public class ContractService implements IContactService {
 	@Override
 	public PersonContactData getContactById(int Id) {
 		return contactRepository.findById(Id).orElseThrow(() -> new ContactException("details not found!"));
-
 	}
 
 	@Override
@@ -54,7 +55,12 @@ public class ContractService implements IContactService {
 	public void deletPersonDataByid(int contId) {
 		PersonContactData contactData = this.getContactById(contId);
 		contactRepository.delete(contactData);
+	}
 
+	@Override
+	public List<PersonContactData> sortByFirstName() {
+
+		return contactRepository.findAll((Sort.by("firstName").ascending()));
 	}
 
 }

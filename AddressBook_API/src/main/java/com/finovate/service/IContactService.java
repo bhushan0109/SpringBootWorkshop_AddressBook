@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.finovate.dto.ContactDTO;
 import com.finovate.model.PersonContactData;
+import org.springframework.data.domain.Sort;
 
 public interface IContactService {
 
@@ -16,5 +17,7 @@ public interface IContactService {
 	PersonContactData updateContactData(int contId, ContactDTO contctDTO);
 
 	void deletPersonDataByid(int contId);
+
+	List<PersonContactData> sortByFirstName();
 
 }
