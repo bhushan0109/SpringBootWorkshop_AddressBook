@@ -10,39 +10,44 @@ import com.finovate.model.PersonContactData;
 
 @Service
 public class ContractService implements IContactService {
+	List<PersonContactData> contactList = new ArrayList<PersonContactData>();
+
 	@Override
 	public PersonContactData createPersonData(ContactDTO contctDTO) {
-		PersonContactData contactData = new PersonContactData(1, contctDTO);
+
+		PersonContactData contactData = null;
+		contactData = new PersonContactData(contactList.size() + 1, contctDTO);
+		contactList.add(contactData);
 		return contactData;
 	}
 
 	@Override
 	public List<PersonContactData> getPersonData() {
-		List<PersonContactData> personList = new ArrayList<PersonContactData>();
-		personList.add(new PersonContactData(1, new ContactDTO("rahul", "patil", "rahul@gmail.com", "876554568")));
-		return personList;
+
+		return contactList;
 	}
 
 	@Override
 	public PersonContactData getContactById(int Id) {
 
-		PersonContactData contactData = new PersonContactData(1,
-				new ContactDTO("raj", "patil", "rahul@gmail.com", "876554568"));
-		return contactData;
+		return contactList.get(Id - 1);
 	}
 
 	@Override
 	public PersonContactData updateContactData(int contId, ContactDTO contctDTO) {
-		PersonContactData contactData = new PersonContactData(1, contctDTO);
+		PersonContactData contactData = this.getContactById(contId);
+		contactData.setEmailId(contctDTO.emailId);
+		contactData.setFirstName(contctDTO.firstName);
+		contactData.setLastName(contctDTO.lastName);
+		contactData.setMobileNumber(contctDTO.mobileNumber);
+		contactList.set(contId - 1, contactData);
 		return contactData;
 	}
 
 	@Override
 	public void deletPersonDataByid(int contId) {
-		// TODO Auto-generated method stub
-		
-	}
+		contactList.remove(contId - 1);
 
-	
+	}
 
 }
