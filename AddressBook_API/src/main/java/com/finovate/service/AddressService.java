@@ -1,55 +1,51 @@
 package com.finovate.service;
-
-import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import com.finovate.dto.AddressDTO;
 import com.finovate.exception.AddressException;
 import com.finovate.model.PersonAddressData;
+import com.finovate.repository.AddressRepository;
 
+@Repository
 @Service
 public class AddressService implements IAddressService {
-	private List<PersonAddressData> addressList = new ArrayList<PersonAddressData>();
+	@Autowired
+	private AddressRepository addressRepository;
 
 	@Override
 	public PersonAddressData createAddressData(AddressDTO addressDTO) {
-		PersonAddressData addressData = null;
-		addressData = new PersonAddressData(addressList.size() + 1, addressDTO);
-		addressList.add(addressData);
-		return addressData;
+		PersonAddressData addressData = new PersonAddressData(addressDTO);
+		return addressRepository.save(addressData);
 	}
-
+	
 	@Override
 	public List<PersonAddressData> getPersonAddressData() {
-		return addressList;
+		return addressRepository.findAll();
 	}
 
 	@Override
 	public PersonAddressData getAddresById(int Id) {
-
-		return addressList.stream().filter(bookData -> bookData.getAddessBookId() == Id).findFirst()
-		.orElseThrow(() -> new AddressException("Address entry Not found"));
+		return addressRepository.findById(Id).orElseThrow(() -> new AddressException("details not found!"));
 	}
 
 	@Override
-
 	public PersonAddressData updatePersonAdresssData(int contId, AddressDTO addressDTO) {
 		PersonAddressData addressData = this.getAddresById(contId);
-
 		addressData.setAddress(addressDTO.address);
 		addressData.setCity(addressDTO.city);
 		addressData.setState(addressDTO.city);
 		addressData.setZipCode(addressDTO.zipCode);
-		addressList.set(contId - 1, addressData);
-		return addressData;
+		return addressRepository.save(addressData);
 	}
 
 	@Override
 	public void deletPersonAddresssByid(int contId) {
-		addressList.remove(contId - 1);
-
+		PersonAddressData addressData = this.getAddresById(contId);
+		addressRepository.delete(addressData);
 	}
 
 }

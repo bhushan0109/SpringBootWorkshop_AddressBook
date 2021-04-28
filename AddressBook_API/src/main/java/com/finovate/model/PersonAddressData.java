@@ -28,9 +28,8 @@ public @Data class PersonAddressData {
 
 	}
 
-	public PersonAddressData(int addessBookId, AddressDTO addressDTO) {
+	public PersonAddressData( AddressDTO addressDTO) {
 
-		this.AddessBookId = addessBookId;
 		this.address = addressDTO.address;
 		this.city = addressDTO.city;
 		this.state = addressDTO.state;
