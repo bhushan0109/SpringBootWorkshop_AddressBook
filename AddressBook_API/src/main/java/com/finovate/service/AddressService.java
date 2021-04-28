@@ -36,6 +36,7 @@ public class AddressService implements IAddressService {
 
 	public PersonAddressData updatePersonAdresssData(int contId, AddressDTO addressDTO) {
 		PersonAddressData addressData = this.getAddresById(contId);
+
 		addressData.setAddress(addressDTO.address);
 		addressData.setCity(addressDTO.city);
 		addressData.setState(addressDTO.city);
@@ -49,4 +50,5 @@ public class AddressService implements IAddressService {
 		addressList.remove(contId - 1);
 
 	}
+
 }

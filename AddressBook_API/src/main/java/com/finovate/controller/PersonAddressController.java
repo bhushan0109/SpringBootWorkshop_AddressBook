@@ -2,9 +2,12 @@ package com.finovate.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,7 +28,7 @@ public class PersonAddressController {
 	private IAddressService addressService;
 
 	@PostMapping("/create")
-	public ResponseEntity<ResponseDTO> createAddressData(@RequestBody AddressDTO addressDTO) {
+	public ResponseEntity<ResponseDTO> createAddressData(@Valid @RequestBody AddressDTO addressDTO) {
 		PersonAddressData personData = addressService.createAddressData(addressDTO);
 		ResponseDTO responseDTO = new ResponseDTO("Successfully created the data ", personData);
 		return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
@@ -39,7 +42,7 @@ public class PersonAddressController {
 	}
 
 	@PutMapping("/update/{contId}")
-	public ResponseEntity<ResponseDTO> updatePersonAdresssData(@PathVariable("contId") int contId,
+	public ResponseEntity<ResponseDTO> updatePersonAdresssData(@Valid @PathVariable("contId") int contId,
 			@RequestBody AddressDTO addressDTO) {
 		PersonAddressData addressData = addressService.updatePersonAdresssData(contId, addressDTO);
 		ResponseDTO responseDTO = new ResponseDTO("Updated address book of Id : ", addressData);
@@ -50,6 +53,12 @@ public class PersonAddressController {
 	public ResponseEntity<ResponseDTO> getAddresById(@PathVariable("contId") int contId) {
 		PersonAddressData addressData = addressService.getAddresById(contId);
 		ResponseDTO responseDTO = new ResponseDTO("Successfully got the data ", addressData);
+		return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
+	}
+	@DeleteMapping("/delete/{contId}")
+	public ResponseEntity<ResponseDTO> deleteAddressBookData(@PathVariable("contId") int contId) {
+		addressService.deletPersonAddresssByid(contId);
+		ResponseDTO responseDTO = new ResponseDTO("Deleted successfully the address ", contId);
 		return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
 	}
 }

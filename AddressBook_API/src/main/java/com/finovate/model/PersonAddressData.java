@@ -10,7 +10,7 @@ public class PersonAddressData {
 	private String address;
 	private String city; // variable and fields of person address
 	private String state;
-	private long zipCode;
+	private String zipCode;
 
 	public PersonAddressData() {
 

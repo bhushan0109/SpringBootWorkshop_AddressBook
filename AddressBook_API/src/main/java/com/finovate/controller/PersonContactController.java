@@ -2,6 +2,8 @@ package com.finovate.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +28,7 @@ public class PersonContactController {
 	private IContactService contactService;
 
 	@PostMapping("/create")
-	public ResponseEntity<ResponseDTO> createPersonData(@RequestBody ContactDTO contactDTO) {
+	public ResponseEntity<ResponseDTO> createPersonData(@Valid @RequestBody ContactDTO contactDTO) {
 		PersonContactData personData = contactService.createPersonData(contactDTO);
 		ResponseDTO responseDTO = new ResponseDTO("Successfully created the data ", personData);
 		return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
@@ -47,7 +49,7 @@ public class PersonContactController {
 	}
 
 	@PutMapping("/update/{contId}")
-	public ResponseEntity<ResponseDTO> updateContactData(@PathVariable("contId") int contId,
+	public ResponseEntity<ResponseDTO> updateContactData(@Valid @PathVariable("contId") int contId,
 			@RequestBody ContactDTO contactDTO) {
 		PersonContactData personData = contactService.updateContactData(contId, contactDTO);
 		ResponseDTO responseDTO = new ResponseDTO("Updated address book of Id : ", personData);
