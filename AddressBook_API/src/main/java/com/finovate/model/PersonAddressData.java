@@ -23,6 +23,7 @@ public class PersonAddressData {
 		this.city = addressDTO.city;
 		this.state = addressDTO.state;
 		this.zipCode = addressDTO.zipCode;
+
 	}
 
 }
