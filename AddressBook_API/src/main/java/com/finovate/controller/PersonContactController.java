@@ -63,8 +63,8 @@ public class PersonContactController {
 		return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
 	}
 	@GetMapping(value = { "/sort" })
-	public ResponseEntity<ResponseDTO> findByFirstName() {
-		List<PersonContactData> personData = contactService.findByFirstName();
+	public ResponseEntity<ResponseDTO> sortByFirstName() {
+		List<PersonContactData> personData = contactService.sortByFirstName();
 		ResponseDTO responseDTO = new ResponseDTO("Successfull got the data", personData);
 		return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
 	}

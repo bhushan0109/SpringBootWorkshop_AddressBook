@@ -17,4 +17,6 @@ public interface IAddressService {
 
 	void deletPersonAddresssByid(int contId);
 
+	List<PersonAddressData> sortBycityName();
+
 }

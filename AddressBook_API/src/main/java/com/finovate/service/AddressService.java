@@ -2,12 +2,14 @@ package com.finovate.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import com.finovate.dto.AddressDTO;
 import com.finovate.exception.AddressException;
 import com.finovate.model.PersonAddressData;
+import com.finovate.model.PersonContactData;
 import com.finovate.repository.AddressRepository;
 
 @Repository
@@ -19,6 +21,7 @@ public class AddressService implements IAddressService {
 	@Override
 	public PersonAddressData createAddressData(AddressDTO addressDTO) {
 		PersonAddressData addressData = new PersonAddressData(addressDTO);
+		
 		return addressRepository.save(addressData);
 	}
 	
@@ -40,12 +43,18 @@ public class AddressService implements IAddressService {
 		addressData.setState(addressDTO.city);
 		addressData.setZipCode(addressDTO.zipCode);
 		return addressRepository.save(addressData);
+		
 	}
 
 	@Override
 	public void deletPersonAddresssByid(int contId) {
 		PersonAddressData addressData = this.getAddresById(contId);
 		addressRepository.delete(addressData);
+	}
+	@Override
+	public List<PersonAddressData> sortBycityName() {
+
+		return addressRepository.findAll((Sort.by("city").ascending()));
 	}
 
 }

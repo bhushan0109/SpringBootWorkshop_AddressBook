@@ -61,4 +61,10 @@ public class PersonAddressController {
 		ResponseDTO responseDTO = new ResponseDTO("Deleted successfully the address ", contId);
 		return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
 	}
+	@GetMapping(value = {"/sort" })
+	public ResponseEntity<ResponseDTO> sortBycityName() {
+		List<PersonAddressData> personData = addressService.sortBycityName();
+		ResponseDTO responseDTO = new ResponseDTO("Successfull got the data", personData);
+		return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
+	}
 }
