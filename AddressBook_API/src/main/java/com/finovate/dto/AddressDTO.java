@@ -1,9 +1,21 @@
 package com.finovate.dto;
 
-public class AddressDTO {
+import javax.validation.constraints.NotEmpty;
+
+import lombok.ToString;
+
+public  @ToString class AddressDTO {
+	
+	@NotEmpty(message = "Address cannot be null")
 	public String address;
+	
+	@NotEmpty(message = "city cannot be null")
 	public String city;
+	
+	@NotEmpty(message = "state cannot be null")
 	public String state;
+	
+	@NotEmpty(message = "zipcode cannot be null")
 	public long zipCode;
 
 	public AddressDTO(String address, String city, String state, long zipCode) {
@@ -12,11 +24,6 @@ public class AddressDTO {
 		this.city = city;
 		this.state = state;
 		this.zipCode = zipCode;
-	}
-
-	@Override
-	public String toString() {
-		return "AddressDTO [address=" + address + ", city=" + city + ", state=" + state + ", zipCode=" + zipCode + "]";
 	}
 
 }

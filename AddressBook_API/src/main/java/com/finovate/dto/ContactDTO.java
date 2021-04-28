@@ -1,10 +1,23 @@
 package com.finovate.dto;
 
-public class ContactDTO {
+import javax.validation.constraints.Pattern;
+
+import lombok.ToString;
+
+public @ToString class ContactDTO {
+	
+	@Pattern(regexp = "^[A-Z]{1}[A-Za-z]{2,}$", message = "Invalid name")
 	public String firstName;
-	public String lastName; // variable and fields of contact person
+	
+	@Pattern(regexp = "^[A-Z]{1}[A-Za-z]{2,}$", message = "Invalid name")
+	public String lastName; 
+	
+	@Pattern(regexp ="^[a-zA-Z0-9]+(([\\.+-][a-z0-9]{1,})?)+@(?:[a-zA-Z0-9])+\\.[a-zA-Z]{2,4}+((\\.[a-z]{2,4})?)$", message = "Invalid name")
 	public String emailId;
+	
+	@Pattern(regexp = "^[6-9]{1}[0-9]{9}$", message = "Invalid phone number")
 	public String mobileNumber;
+	
 
 	public ContactDTO(String firstName, String lastName, String emailId, String mobileNumber) {
 		super();
@@ -14,10 +27,6 @@ public class ContactDTO {
 		this.mobileNumber = mobileNumber;
 	}
 		
-	@Override
-	public String toString() {
-		return "ContactDTO [firstName=" + firstName + ", lastName=" + lastName + ", emailId=" + emailId
-				+ ", mobileNumber=" + mobileNumber + "]";
-	}
+	
 
 }
