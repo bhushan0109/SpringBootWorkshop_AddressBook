@@ -54,7 +54,6 @@ public class ContractService implements IContactService {
 	public void deletPersonDataByid(int contId) {
 		PersonContactData contactData = this.getContactById(contId);
 		contactRepository.delete(contactData);
-		;
 
 	}
 

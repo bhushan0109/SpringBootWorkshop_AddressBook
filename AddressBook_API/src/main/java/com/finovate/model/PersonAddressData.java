@@ -1,11 +1,20 @@
 package com.finovate.model;
 
+
+
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import com.finovate.dto.AddressDTO;
 
@@ -23,6 +32,15 @@ public @Data class PersonAddressData {
 	private String city; // variable and fields of person address
 	private String state;
 	private String zipCode;
+	@CreationTimestamp
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "createdDate")
+	private java.util.Calendar createdDate;
+
+	@UpdateTimestamp
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "modifiedDate")
+	private java.util.Calendar modifiedDate;
 
 	public PersonAddressData() {
 

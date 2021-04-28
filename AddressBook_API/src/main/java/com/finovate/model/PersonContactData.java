@@ -1,11 +1,19 @@
 package com.finovate.model;
 
+import java.time.LocalDateTime;
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import com.finovate.dto.ContactDTO;
 
@@ -23,6 +31,16 @@ public @Data class PersonContactData {
 	private String lastName; // variable and fields of contact person
 	private String emailId;
 	private String mobileNumber;
+
+	@CreationTimestamp
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "createdDate")
+	private java.util.Calendar createdDate;
+
+	@UpdateTimestamp
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "modifiedDate")
+	private java.util.Calendar modifiedDate;
 
 	public PersonContactData() {
 		// no argument constructor
