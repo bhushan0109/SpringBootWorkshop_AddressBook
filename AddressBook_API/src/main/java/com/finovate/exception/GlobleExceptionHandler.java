@@ -24,7 +24,12 @@ public class GlobleExceptionHandler {
 		return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.BAD_REQUEST);
 	}
 	@ExceptionHandler(AddressException.class)
-	public ResponseEntity<ResponseDTO> handleAddressBookException(AddressException exception) {
+	public ResponseEntity<ResponseDTO> handleAddressException(AddressException exception) {
+		ResponseDTO responseDTO = new ResponseDTO("Exception while processing REST request", exception.getMessage());
+		return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.BAD_REQUEST);
+	}
+	@ExceptionHandler(ContactException.class)
+	public ResponseEntity<ResponseDTO> handleContactException(ContactException exception) {
 		ResponseDTO responseDTO = new ResponseDTO("Exception while processing REST request", exception.getMessage());
 		return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.BAD_REQUEST);
 	}

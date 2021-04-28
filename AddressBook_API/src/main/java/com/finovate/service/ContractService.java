@@ -6,6 +6,8 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.finovate.dto.ContactDTO;
+import com.finovate.exception.AddressException;
+import com.finovate.exception.ContactException;
 import com.finovate.model.PersonContactData;
 
 @Service
@@ -30,7 +32,8 @@ public class ContractService implements IContactService {
 	@Override
 	public PersonContactData getContactById(int Id) {
 
-		return contactList.get(Id - 1);
+		return contactList.stream().filter(bookData -> bookData.getContactBookId() == Id).findFirst()
+				.orElseThrow(() -> new ContactException("Contact entry Not found"));
 	}
 
 	@Override
