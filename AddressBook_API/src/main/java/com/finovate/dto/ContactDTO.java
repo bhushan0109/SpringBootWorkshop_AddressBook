@@ -5,11 +5,11 @@ import javax.validation.constraints.Pattern;
 import lombok.ToString;
 
 public @ToString class ContactDTO {
+	
 	@Pattern(regexp = "^[A-Z][a-z]{2,}$", message = "Invalid firstName")
-	//@Pattern(regexp = "^[A-Z]{1}[A-Za-z]{2,}$", message = "Invalid name")
 	public String firstName;
+	
 	@Pattern(regexp = "^[A-Z][a-z]{2,}$", message = "Invalid lastName")
-	//@Pattern(regexp = "^[A-Z]{1}[A-Za-z]{2,}$", message = "Invalid name")
 	public String lastName; 
 	
 	@Pattern(regexp ="^[a-zA-Z0-9]+(([\\.+-][a-z0-9]{1,})?)+@(?:[a-zA-Z0-9])+\\.[a-zA-Z]{2,4}+((\\.[a-z]{2,4})?)$", message = "Invalid name")
