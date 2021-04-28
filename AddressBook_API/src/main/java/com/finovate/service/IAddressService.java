@@ -15,4 +15,6 @@ public interface IAddressService {
 
 	PersonAddressData updatePersonAdresssData(int contId, AddressDTO addressDTO);
 
+	void deletPersonAddresssByid(int contId);
+
 }
