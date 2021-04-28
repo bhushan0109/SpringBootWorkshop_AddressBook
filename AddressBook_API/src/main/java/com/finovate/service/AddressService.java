@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.finovate.dto.AddressDTO;
+import com.finovate.exception.AddressException;
 import com.finovate.model.PersonAddressData;
 
 @Service
@@ -28,8 +29,8 @@ public class AddressService implements IAddressService {
 	@Override
 	public PersonAddressData getAddresById(int Id) {
 
-		return addressList.get(Id - 1);
-
+		return addressList.stream().filter(bookData -> bookData.getAddessBookId() == Id).findFirst()
+		.orElseThrow(() -> new AddressException("Address entry Not found"));
 	}
 
 	@Override
