@@ -2,6 +2,8 @@ package com.finovate.model;
 
 import com.finovate.dto.ContactDTO;
 
+import lombok.Data;
+@Data
 public class PersonContactData {
 	private int contactBookId;
 	private String firstName;
@@ -22,50 +24,5 @@ public class PersonContactData {
 		this.mobileNumber = contactDTO.mobileNumber;
 	}
 
-	public int getContactBookId() {
-		return contactBookId;
-	}
-
-	public void setContactBookId(int contactBookId) {
-		this.contactBookId = contactBookId;
-	}
-
-	public String getFirstName() {
-		return firstName;																	//getter and setter
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	public String getEmailId() {
-		return emailId;
-	}
-
-	public void setEmailId(String emailId) {
-		this.emailId = emailId;
-	}
-
-	public String getMobileNumber() {
-		return mobileNumber;
-	}
-
-	public void setMobileNumber(String mobileNumber) {
-		this.mobileNumber = mobileNumber;
-	}
-
-	@Override
-	public String toString() {					//o/p toString override
-		return "PersonContact [contactBookId=" + contactBookId + ", firstName=" + firstName + ", lastName=" + lastName		
-				+ ", emailId=" + emailId + ", mobileNumber=" + mobileNumber + "]";
-	}
 
 }
