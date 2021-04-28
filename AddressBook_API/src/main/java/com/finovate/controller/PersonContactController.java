@@ -48,7 +48,7 @@ public class PersonContactController {
 		return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
 	}
 
-	@PutMapping("/update/{contId}")
+	@PutMapping("/{contId}")
 	public ResponseEntity<ResponseDTO> updateContactData(@Valid @PathVariable("contId") int contId,
 			@RequestBody ContactDTO contactDTO) {
 		PersonContactData personData = contactService.updateContactData(contId, contactDTO);
@@ -56,7 +56,7 @@ public class PersonContactController {
 		return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
 	}
 
-	@DeleteMapping("/delete/{contId}")
+	@DeleteMapping("/{contId}")
 	public ResponseEntity<ResponseDTO> deletPersonDataByid(@PathVariable("contId") int contId) {
 		contactService.deletPersonDataByid(contId);
 		ResponseDTO responseDTO = new ResponseDTO("Deleted successfully the contact ", contId);

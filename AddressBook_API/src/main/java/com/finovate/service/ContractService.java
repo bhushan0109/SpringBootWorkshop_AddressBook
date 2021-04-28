@@ -1,39 +1,42 @@
 package com.finovate.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import com.finovate.dto.ContactDTO;
-import com.finovate.exception.AddressException;
+
 import com.finovate.exception.ContactException;
 import com.finovate.model.PersonContactData;
+import com.finovate.repository.ContactRepository;
 
+@Repository
 @Service
 public class ContractService implements IContactService {
-	List<PersonContactData> contactList = new ArrayList<PersonContactData>();
+
+	@Autowired
+	private ContactRepository contactRepository;
 
 	@Override
-	public PersonContactData createPersonData(ContactDTO contctDTO) {
+	public PersonContactData createPersonData(ContactDTO contactDTO) {
 
-		PersonContactData contactData = null;
-		contactData = new PersonContactData(contactList.size() + 1, contctDTO);
-		contactList.add(contactData);
-		return contactData;
+		PersonContactData contactData = new PersonContactData(contactDTO);
+
+		return contactRepository.save(contactData);
 	}
 
 	@Override
 	public List<PersonContactData> getPersonData() {
 
-		return contactList;
+		return contactRepository.findAll();
 	}
 
 	@Override
 	public PersonContactData getContactById(int Id) {
+		return contactRepository.findById(Id).orElseThrow(() -> new ContactException("details not found!"));
 
-		return contactList.stream().filter(bookData -> bookData.getContactBookId() == Id).findFirst()
-				.orElseThrow(() -> new ContactException("Contact entry Not found"));
 	}
 
 	@Override
@@ -43,13 +46,15 @@ public class ContractService implements IContactService {
 		contactData.setFirstName(contctDTO.firstName);
 		contactData.setLastName(contctDTO.lastName);
 		contactData.setMobileNumber(contctDTO.mobileNumber);
-		contactList.set(contId - 1, contactData);
-		return contactData;
+
+		return contactRepository.save(contactData);
 	}
 
 	@Override
 	public void deletPersonDataByid(int contId) {
-		contactList.remove(contId - 1);
+		PersonContactData contactData = this.getContactById(contId);
+		contactRepository.delete(contactData);
+		;
 
 	}
 
