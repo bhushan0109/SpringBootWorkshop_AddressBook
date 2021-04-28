@@ -1,5 +1,6 @@
 package com.finovate.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,13 +11,14 @@ import com.finovate.dto.ContactDTO;
 
 import lombok.Data;
 
-@Data
 @Entity
-@Table(name="peroson_contact")
-public class PersonContactData {
+@Table(name = "person_contact")
+public @Data class PersonContactData {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "contact_id")
 	private int contactBookId;
+
 	private String firstName;
 	private String lastName; // variable and fields of contact person
 	private String emailId;
@@ -26,9 +28,8 @@ public class PersonContactData {
 		// no argument constructor
 	}
 
-	public PersonContactData(int contactBookId, ContactDTO contactDTO) { // argument constructor
+	public PersonContactData(ContactDTO contactDTO) { // argument constructor
 
-		this.contactBookId = contactBookId;
 		this.firstName = contactDTO.firstName;
 		this.lastName = contactDTO.lastName;
 		this.emailId = contactDTO.emailId;

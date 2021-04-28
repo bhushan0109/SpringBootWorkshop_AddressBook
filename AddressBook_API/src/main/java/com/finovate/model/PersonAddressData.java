@@ -1,5 +1,6 @@
 package com.finovate.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,12 +11,13 @@ import com.finovate.dto.AddressDTO;
 
 import lombok.Data;
 
-@Data
+
 @Entity
 @Table(name= "person_address")
-public class PersonAddressData {
+public @Data class PersonAddressData {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "ID")
 	private int AddessBookId;
 	private String address;
 	private String city; // variable and fields of person address
