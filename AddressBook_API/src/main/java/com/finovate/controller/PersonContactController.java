@@ -1,6 +1,7 @@
 package com.finovate.controller;
 
 import java.util.List;
+import java.util.UUID;
 
 import javax.validation.Valid;
 
@@ -34,7 +35,7 @@ public class PersonContactController {
 		return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
 	}
 
-	@GetMapping(value = { "", "/", "/get" })
+	@GetMapping(value = { "", "/", "/getAll" })
 	public ResponseEntity<ResponseDTO> getPersonData() {
 		List<PersonContactData> personData = contactService.getPersonData();
 		ResponseDTO responseDTO = new ResponseDTO("Successfull got the data", personData);
@@ -42,14 +43,14 @@ public class PersonContactController {
 	}
 
 	@GetMapping("/get/{contId}")
-	public ResponseEntity<ResponseDTO> findByFastName(@PathVariable("contId") int contId) {
+	public ResponseEntity<ResponseDTO> findByFastName(@PathVariable(value="contId") UUID contId) {
 		PersonContactData personData = contactService.getContactById(contId);
 		ResponseDTO responseDTO = new ResponseDTO("Successfully got the data ", personData);
 		return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
 	}
 
 	@PutMapping("/{contId}")
-	public ResponseEntity<ResponseDTO> updateContactData(@Valid @PathVariable("contId") int contId,
+	public ResponseEntity<ResponseDTO> updateContactData(@Valid @PathVariable("contId") UUID contId,
 			@RequestBody ContactDTO contactDTO) {
 		PersonContactData personData = contactService.updateContactData(contId, contactDTO);
 		ResponseDTO responseDTO = new ResponseDTO("Updated address book of Id : ", personData);
@@ -57,7 +58,7 @@ public class PersonContactController {
 	}
 
 	@DeleteMapping("/{contId}")
-	public ResponseEntity<ResponseDTO> deletPersonDataByid(@PathVariable("contId") int contId) {
+	public ResponseEntity<ResponseDTO> deletPersonDataByid(@PathVariable("contId") UUID contId) {
 		contactService.deletPersonDataByid(contId);
 		ResponseDTO responseDTO = new ResponseDTO("Deleted successfully the contact ", contId);
 		return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);

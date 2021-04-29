@@ -1,6 +1,7 @@
 package com.finovate.service;
 
 import java.util.List;
+import java.util.UUID;
 
 import com.finovate.dto.ContactDTO;
 import com.finovate.model.PersonContactData;
@@ -11,11 +12,11 @@ public interface IContactService {
 
 	List<PersonContactData> getPersonData();
 
-	PersonContactData getContactById(int Id);
+	PersonContactData getContactById(UUID Id);
 
-	PersonContactData updateContactData(int contId, ContactDTO contctDTO);
+	PersonContactData updateContactData(UUID contId, ContactDTO contctDTO);
 
-	void deletPersonDataByid(int contId);
+	void deletPersonDataByid(UUID contId);
 
 	List<PersonContactData> sortByFirstName();
 

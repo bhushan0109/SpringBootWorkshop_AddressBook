@@ -23,13 +23,7 @@ import lombok.Data;
 @Entity
 @Table(name = "person_address")
 public @Data class PersonAddressData {
-	/*
-	 * @Id
-	 * 
-	 * @GeneratedValue(strategy = GenerationType.AUTO)
-	 * 
-	 * @Column(name = "ID") private int AddessBookId;
-	 */
+
 	@Id
 	@GeneratedValue(generator = "uuid2")
 	@GenericGenerator(name = "uuid2", strategy = "uuid2")
