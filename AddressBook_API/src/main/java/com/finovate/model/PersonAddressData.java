@@ -1,8 +1,7 @@
 package com.finovate.model;
 
-
-
 import java.util.Date;
+import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,20 +13,28 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import com.finovate.dto.AddressDTO;
 
 import lombok.Data;
 
-
 @Entity
-@Table(name= "person_address")
+@Table(name = "person_address")
 public @Data class PersonAddressData {
+	/*
+	 * @Id
+	 * 
+	 * @GeneratedValue(strategy = GenerationType.AUTO)
+	 * 
+	 * @Column(name = "ID") private int AddessBookId;
+	 */
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "ID")
-	private int AddessBookId;
+	@GeneratedValue(generator = "uuid2")
+	@GenericGenerator(name = "uuid2", strategy = "uuid2")
+	@Column(name = "id", columnDefinition = "BINARY(16)")
+	private UUID id;
 	private String address;
 	private String city; // variable and fields of person address
 	private String state;
@@ -46,7 +53,7 @@ public @Data class PersonAddressData {
 
 	}
 
-	public PersonAddressData( AddressDTO addressDTO) {
+	public PersonAddressData(AddressDTO addressDTO) {
 
 		this.address = addressDTO.address;
 		this.city = addressDTO.city;
