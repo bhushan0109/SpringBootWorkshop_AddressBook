@@ -1,8 +1,5 @@
 package com.finovate.model;
 
-import java.time.LocalDateTime;
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,10 +20,6 @@ import lombok.Data;
 @Table(name = "person_contact")
 public @Data class PersonContactData {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "contact_id")
-	private int contactBookId;
-
 	private String firstName;
 	private String lastName; // variable and fields of contact person
 	private String emailId;

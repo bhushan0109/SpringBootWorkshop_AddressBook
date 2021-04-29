@@ -1,6 +1,7 @@
 package com.finovate.controller;
 
 import java.util.List;
+import java.util.UUID;
 
 import javax.validation.Valid;
 
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.finovate.dto.AddressDTO;
@@ -34,7 +36,7 @@ public class PersonAddressController {
 		return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
 	}
 
-	@GetMapping(value = { "", "/", "/get" })
+	@GetMapping(value = { "", "/", "/getall" })
 	public ResponseEntity<ResponseDTO> getPersonAddressData() {
 		List<PersonAddressData> personData = addressService.getPersonAddressData();
 		ResponseDTO responseDTO = new ResponseDTO("Successfull got the data", personData);
@@ -42,7 +44,7 @@ public class PersonAddressController {
 	}
 
 	@PutMapping("/update/{contId}")
-	public ResponseEntity<ResponseDTO> updatePersonAdresssData(@Valid @PathVariable("contId") int contId,
+	public ResponseEntity<ResponseDTO> updatePersonAdresssData(@Valid @PathVariable(value="contId") UUID contId,
 			@RequestBody AddressDTO addressDTO) {
 		PersonAddressData addressData = addressService.updatePersonAdresssData(contId, addressDTO);
 		ResponseDTO responseDTO = new ResponseDTO("Updated address book of Id : ", addressData);
@@ -50,18 +52,20 @@ public class PersonAddressController {
 	}
 
 	@GetMapping("/get/{contId}")
-	public ResponseEntity<ResponseDTO> getAddresById(@PathVariable("contId") int contId) {
+	public ResponseEntity<ResponseDTO> getAddresById(@PathVariable(value="contId") UUID contId) {
 		PersonAddressData addressData = addressService.getAddresById(contId);
 		ResponseDTO responseDTO = new ResponseDTO("Successfully got the data ", addressData);
 		return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
 	}
+
 	@DeleteMapping("/delete/{contId}")
-	public ResponseEntity<ResponseDTO> deleteAddressBookData(@PathVariable("contId") int contId) {
+	public ResponseEntity<ResponseDTO> deletPersonAddresssByid(@PathVariable  UUID contId) {
 		addressService.deletPersonAddresssByid(contId);
 		ResponseDTO responseDTO = new ResponseDTO("Deleted successfully the address ", contId);
 		return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
 	}
-	@GetMapping(value = {"/sort" })
+
+	@GetMapping(value = { "/sort" })
 	public ResponseEntity<ResponseDTO> sortBycityName() {
 		List<PersonAddressData> personData = addressService.sortBycityName();
 		ResponseDTO responseDTO = new ResponseDTO("Successfull got the data", personData);
