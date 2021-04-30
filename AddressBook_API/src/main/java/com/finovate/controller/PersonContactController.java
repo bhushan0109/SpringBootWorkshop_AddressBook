@@ -43,7 +43,7 @@ public class PersonContactController {
 	}
 
 	@GetMapping("/get/{contId}")
-	public ResponseEntity<ResponseDTO> findByFastName(@PathVariable(value="contId") UUID contId) {
+	public ResponseEntity<ResponseDTO> findByFastName(@PathVariable(value = "contId") UUID contId) {
 		PersonContactData personData = contactService.getContactById(contId);
 		ResponseDTO responseDTO = new ResponseDTO("Successfully got the data ", personData);
 		return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
@@ -63,6 +63,7 @@ public class PersonContactController {
 		ResponseDTO responseDTO = new ResponseDTO("Deleted successfully the contact ", contId);
 		return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
 	}
+
 	@GetMapping(value = { "/sort" })
 	public ResponseEntity<ResponseDTO> sortByFirstName() {
 		List<PersonContactData> personData = contactService.sortByFirstName();
