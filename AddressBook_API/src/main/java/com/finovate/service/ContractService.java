@@ -5,7 +5,7 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
-import org.springframework.stereotype.Repository;
+
 import org.springframework.stereotype.Service;
 
 import com.finovate.dto.ContactDTO;
@@ -14,7 +14,6 @@ import com.finovate.exception.ContactException;
 import com.finovate.model.PersonContactData;
 import com.finovate.repository.ContactRepository;
 
-@Repository
 @Service
 public class ContractService implements IContactService {
 
@@ -49,7 +48,7 @@ public class ContractService implements IContactService {
 
 	@Override
 	public void deletPersonDataByid(UUID contId) {
-		
+
 		contactRepository.deleteById(contId);
 	}
 

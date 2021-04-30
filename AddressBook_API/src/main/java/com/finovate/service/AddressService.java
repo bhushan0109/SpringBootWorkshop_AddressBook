@@ -5,7 +5,7 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
-import org.springframework.stereotype.Repository;
+
 import org.springframework.stereotype.Service;
 
 import com.finovate.dto.AddressDTO;
@@ -13,10 +13,9 @@ import com.finovate.exception.AddressException;
 import com.finovate.model.PersonAddressData;
 import com.finovate.repository.AddressRepository;
 
-@Repository
 @Service
 public class AddressService implements IAddressService {
-	
+
 	@Autowired
 	private AddressRepository addressRepository;
 
@@ -31,6 +30,7 @@ public class AddressService implements IAddressService {
 		return addressRepository.findAll();
 	}
 
+	@Override
 	public PersonAddressData updatePersonAdresssData(UUID contId, AddressDTO addressDTO) {
 		PersonAddressData addressData = this.getAddresById(contId);
 		addressData.setAddress(addressDTO.address);
@@ -47,7 +47,8 @@ public class AddressService implements IAddressService {
 
 	@Override
 	public PersonAddressData getAddresById(UUID Id) {
-		PersonAddressData res = addressRepository.findById(Id).orElseThrow(() -> new AddressException("details not found!"));
+		PersonAddressData res = addressRepository.findById(Id)
+				.orElseThrow(() -> new AddressException("details not found!"));
 		return res;
 	}
 
