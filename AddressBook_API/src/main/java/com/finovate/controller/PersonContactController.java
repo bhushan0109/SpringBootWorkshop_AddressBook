@@ -23,7 +23,7 @@ import com.finovate.model.PersonContactData;
 import com.finovate.service.IContactService;
 
 @RestController
-@RequestMapping("/person")
+@RequestMapping("/person/contact")
 public class PersonContactController {
 	@Autowired
 	private IContactService contactService;
