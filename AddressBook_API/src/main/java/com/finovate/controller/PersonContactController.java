@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.finovate.dto.ContactDTO;
 import com.finovate.dto.ResponseDTO;
 import com.finovate.model.PersonContactData;
 import com.finovate.service.IContactService;
@@ -29,8 +28,8 @@ public class PersonContactController {
 	private IContactService contactService;
 
 	@PostMapping("/create")
-	public ResponseEntity<ResponseDTO> createPersonData(@Valid @RequestBody ContactDTO contactDTO) {
-		PersonContactData personData = contactService.createPersonData(contactDTO);
+	public ResponseEntity<ResponseDTO> createPersonData(@Valid @RequestBody PersonContactData contact) {
+		PersonContactData personData = contactService.createPersonData(contact);
 		ResponseDTO responseDTO = new ResponseDTO("Successfully created the data ", personData);
 		return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
 	}
@@ -51,8 +50,8 @@ public class PersonContactController {
 
 	@PutMapping("/{contId}")
 	public ResponseEntity<ResponseDTO> updateContactData(@Valid @PathVariable("contId") UUID contId,
-			@RequestBody ContactDTO contactDTO) {
-		PersonContactData personData = contactService.updateContactData(contId, contactDTO);
+			@RequestBody PersonContactData contact) {
+		PersonContactData personData = contactService.updateContactData(contId, contact);
 		ResponseDTO responseDTO = new ResponseDTO("Updated address book of Id : ", personData);
 		return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
 	}
@@ -67,7 +66,7 @@ public class PersonContactController {
 	@GetMapping(value = { "/sort" })
 	public ResponseEntity<ResponseDTO> sortByFirstName() {
 		List<PersonContactData> personData = contactService.sortByFirstName();
-		ResponseDTO responseDTO = new ResponseDTO("Successfull got the data", personData);
+		ResponseDTO responseDTO = new ResponseDTO("Successfull sorted the data", personData);
 		return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
 	}
 }

@@ -5,11 +5,7 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
-
 import org.springframework.stereotype.Service;
-
-import com.finovate.dto.ContactDTO;
-
 import com.finovate.exception.ContactException;
 import com.finovate.model.PersonContactData;
 import com.finovate.repository.ContactRepository;
@@ -21,8 +17,13 @@ public class ContractService implements IContactService {
 	private ContactRepository contactRepository;
 
 	@Override
-	public PersonContactData createPersonData(ContactDTO contactDTO) {
-		PersonContactData contactData = new PersonContactData(contactDTO);
+	public PersonContactData createPersonData(PersonContactData personContactData) {
+		PersonContactData contactData = new PersonContactData();
+		contactData.setEmailId(personContactData.getEmailId());
+		contactData.setLastName(personContactData.getLastName());
+		contactData.setMobileNumber(personContactData.getMobileNumber());
+		contactData.setFirstName(personContactData.getFirstName());
+		contactData.setPersonAddressData(personContactData.getPersonAddressData());
 		return contactRepository.save(contactData);
 	}
 
@@ -37,16 +38,6 @@ public class ContractService implements IContactService {
 	}
 
 	@Override
-	public PersonContactData updateContactData(UUID contId, ContactDTO contctDTO) {
-		PersonContactData contactData = this.getContactById(contId);
-		contactData.setEmailId(contctDTO.emailId);
-		contactData.setFirstName(contctDTO.firstName);
-		contactData.setLastName(contctDTO.lastName);
-		contactData.setMobileNumber(contctDTO.mobileNumber);
-		return contactRepository.save(contactData);
-	}
-
-	@Override
 	public void deletPersonDataByid(UUID contId) {
 
 		contactRepository.deleteById(contId);
@@ -56,6 +47,19 @@ public class ContractService implements IContactService {
 	public List<PersonContactData> sortByFirstName() {
 
 		return contactRepository.findAll((Sort.by("firstName").ascending()));
+	}
+
+	@Override
+	public PersonContactData updateContactData(UUID contId, PersonContactData prg) {
+
+		PersonContactData personContact = contactRepository.findById(contId).get();
+		personContact.setFirstName(prg.getFirstName());
+		personContact.setLastName(prg.getLastName());
+		personContact.setEmailId(prg.getEmailId());
+		personContact.setMobileNumber(prg.getMobileNumber());
+		personContact.setPersonAddressData(prg.getPersonAddressData());
+		return contactRepository.save(personContact);
+
 	}
 
 }

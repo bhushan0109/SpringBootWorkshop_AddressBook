@@ -8,16 +8,16 @@ import com.finovate.model.PersonContactData;
 
 public interface IContactService {
 
-	PersonContactData createPersonData(ContactDTO contctDTO);
-
 	List<PersonContactData> getPersonData();
 
 	PersonContactData getContactById(UUID Id);
 
-	PersonContactData updateContactData(UUID contId, ContactDTO contctDTO);
-
 	void deletPersonDataByid(UUID contId);
 
 	List<PersonContactData> sortByFirstName();
+
+	PersonContactData createPersonData(PersonContactData personContactData);
+
+	PersonContactData updateContactData(UUID contId, PersonContactData prg);
 
 }

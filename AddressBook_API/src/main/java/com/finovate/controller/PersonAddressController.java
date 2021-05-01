@@ -22,6 +22,8 @@ import com.finovate.dto.ResponseDTO;
 import com.finovate.model.PersonAddressData;
 import com.finovate.service.IAddressService;
 
+import io.swagger.annotations.Api;
+
 @RestController
 @RequestMapping("/person/address")
 public class PersonAddressController {

@@ -1,14 +1,22 @@
 package com.finovate.model;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
@@ -24,22 +32,36 @@ public @Data class PersonContactData {
 	@Id
 	@GeneratedValue(generator = "uuid2")
 	@GenericGenerator(name = "uuid2", strategy = "uuid2")
-	@Column(name = "id", columnDefinition = "BINARY(16)")
-	private UUID id;
+	@Column(name = "contactid", columnDefinition = "BINARY(16)")
+	private UUID contactid;
+
+	@NotNull
+	@Size(max = 65)
+	@Pattern(regexp = "^[A-Z][a-z]{2,}$", message = "Invalid firstName")
 	private String firstName;
-	private String lastName; // variable and fields of contact person
+
+	@NotNull
+	@Size(max = 65)
+	@Pattern(regexp = "^[A-Z][a-z]{2,}$", message = "Invalid lastName")
+	private String lastName;
+
+	@NotNull
+	@Email
+	@Size(max = 100)
+	@Pattern(regexp = "^[a-zA-Z0-9]+(([\\.+-][a-z0-9]{1,})?)+@(?:[a-zA-Z0-9])+\\.[a-zA-Z]{2,4}+((\\.[a-z]{2,4})?)$", message = "Invalid name")
 	private String emailId;
+
+	@Pattern(regexp = "^[6-9]{1}[0-9]{9}$", message = "Invalid phone number")
 	private String mobileNumber;
 
-	@CreationTimestamp
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "createdDate")
-	private java.util.Calendar createdDate;
+	@NotNull
+	@OneToOne(cascade = CascadeType.ALL)
+	private PersonAddressData personAddressData;
 
+	@CreationTimestamp
+	private LocalDateTime created_on;
 	@UpdateTimestamp
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "modifiedDate")
-	private java.util.Calendar modifiedDate;
+	private LocalDateTime updated_on;
 
 	public PersonContactData() {
 		// no argument constructor
@@ -52,6 +74,14 @@ public @Data class PersonContactData {
 		this.emailId = contactDTO.emailId;
 		this.mobileNumber = contactDTO.mobileNumber;
 
+	}
+
+	public PersonContactData(PersonContactData personContactData) {
+		// TODO Auto-generated constructor stub
+		this.firstName = personContactData.firstName;
+		this.lastName = personContactData.lastName;
+		this.emailId = personContactData.emailId;
+		this.mobileNumber = personContactData.mobileNumber;
 	}
 
 }
