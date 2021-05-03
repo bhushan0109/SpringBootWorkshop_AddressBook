@@ -4,20 +4,20 @@ import java.util.List;
 import java.util.UUID;
 
 import com.finovate.dto.AddressDTO;
-import com.finovate.model.PersonAddressData;
+import com.finovate.model.Address;
 
 public interface IAddressService {
 
-	PersonAddressData createAddressData(AddressDTO addressDTO);
+	Address createAddressData(AddressDTO addressDTO);
 
-	List<PersonAddressData> getPersonAddressData();
+	List<Address> getPersonAddressData();
 
-	PersonAddressData getAddresById(UUID Id);
+	Address getAddresById(UUID Id);
 	
-	PersonAddressData updatePersonAdresssData(UUID contId, AddressDTO addressDTO);
+	Address updatePersonAdresssData(UUID contId, AddressDTO addressDTO);
 
 	void deletPersonAddresssByid(UUID contId);
 
-	List<PersonAddressData> sortBycityName();
+	List<Address> sortBycityName();
 	
 }

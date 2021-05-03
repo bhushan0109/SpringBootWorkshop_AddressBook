@@ -23,7 +23,7 @@ public class SwaggerConfiguration {
 	@Bean
 	public Docket swaggerProductApi() {
 		return new Docket(DocumentationType.SWAGGER_2).groupName("contact").apiInfo(apiInfo()).select()
-				.apis(RequestHandlerSelectors.basePackage("com.finovate.controller")).paths(regex("/person.*"))
+				.apis(RequestHandlerSelectors.basePackage("com.finovate.controller")).paths(regex("/person/contact.*"))
 				.build();
 
 	}

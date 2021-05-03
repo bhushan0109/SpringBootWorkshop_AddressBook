@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.finovate.dto.AddressDTO;
 import com.finovate.exception.AddressException;
-import com.finovate.model.PersonAddressData;
+import com.finovate.model.Address;
 import com.finovate.repository.AddressRepository;
 
 @Service
@@ -20,19 +20,19 @@ public class AddressService implements IAddressService {
 	private AddressRepository addressRepository;
 
 	@Override
-	public PersonAddressData createAddressData(AddressDTO addressDTO) {
-		PersonAddressData addressData = new PersonAddressData(addressDTO);
+	public Address createAddressData(AddressDTO addressDTO) {
+		Address addressData = new Address(addressDTO);
 		return addressRepository.save(addressData);
 	}
 
 	@Override
-	public List<PersonAddressData> getPersonAddressData() {
+	public List<Address> getPersonAddressData() {
 		return addressRepository.findAll();
 	}
 
 	@Override
-	public PersonAddressData updatePersonAdresssData(UUID contId, AddressDTO addressDTO) {
-		PersonAddressData addressData = this.getAddresById(contId);
+	public Address updatePersonAdresssData(UUID contId, AddressDTO addressDTO) {
+		Address addressData = this.getAddresById(contId);
 		addressData.setAddress(addressDTO.address);
 		addressData.setCity(addressDTO.city);
 		addressData.setState(addressDTO.state);
@@ -41,13 +41,13 @@ public class AddressService implements IAddressService {
 	}
 
 	@Override
-	public List<PersonAddressData> sortBycityName() {
+	public List<Address> sortBycityName() {
 		return addressRepository.findAll((Sort.by("city").ascending()));
 	}
 
 	@Override
-	public PersonAddressData getAddresById(UUID Id) {
-		PersonAddressData res = addressRepository.findById(Id)
+	public Address getAddresById(UUID Id) {
+		Address res = addressRepository.findById(Id)
 				.orElseThrow(() -> new AddressException("details not found!"));
 		return res;
 	}

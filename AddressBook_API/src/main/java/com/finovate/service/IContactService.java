@@ -3,21 +3,20 @@ package com.finovate.service;
 import java.util.List;
 import java.util.UUID;
 
-import com.finovate.dto.ContactDTO;
-import com.finovate.model.PersonContactData;
+import com.finovate.model.Contact;
 
 public interface IContactService {
 
-	List<PersonContactData> getPersonData();
+	List<Contact> getPersonData();
 
-	PersonContactData getContactById(UUID Id);
+	Contact getContactById(UUID Id);
 
 	void deletPersonDataByid(UUID contId);
 
-	List<PersonContactData> sortByFirstName();
+	List<Contact> sortByFirstName();
 
-	PersonContactData createPersonData(PersonContactData personContactData);
+	Contact updateContactData(UUID contId, Contact prg);
 
-	PersonContactData updateContactData(UUID contId, PersonContactData prg);
+	Contact createPersonData(Contact personContactData);
 
 }

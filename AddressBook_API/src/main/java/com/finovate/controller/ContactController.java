@@ -18,40 +18,41 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.finovate.dto.ResponseDTO;
-import com.finovate.model.PersonContactData;
+
+import com.finovate.model.Contact;
 import com.finovate.service.IContactService;
 
 @RestController
 @RequestMapping("/person/contact")
-public class PersonContactController {
+public class ContactController {
 	@Autowired
 	private IContactService contactService;
 
 	@PostMapping("/create")
-	public ResponseEntity<ResponseDTO> createPersonData(@Valid @RequestBody PersonContactData contact) {
-		PersonContactData personData = contactService.createPersonData(contact);
+	public ResponseEntity<ResponseDTO> createPersonData(@Valid @RequestBody Contact contact) {
+		Contact personData = contactService.createPersonData(contact);
 		ResponseDTO responseDTO = new ResponseDTO("Successfully created the data ", personData);
 		return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
 	}
 
 	@GetMapping(value = { "", "/", "/getAll" })
 	public ResponseEntity<ResponseDTO> getPersonData() {
-		List<PersonContactData> personData = contactService.getPersonData();
+		List<Contact> personData = contactService.getPersonData();
 		ResponseDTO responseDTO = new ResponseDTO("Successfull got the data", personData);
 		return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
 	}
 
 	@GetMapping("/get/{contId}")
 	public ResponseEntity<ResponseDTO> findByFastName(@PathVariable(value = "contId") UUID contId) {
-		PersonContactData personData = contactService.getContactById(contId);
+		Contact personData = contactService.getContactById(contId);
 		ResponseDTO responseDTO = new ResponseDTO("Successfully got the data ", personData);
 		return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
 	}
 
 	@PutMapping("/{contId}")
 	public ResponseEntity<ResponseDTO> updateContactData(@Valid @PathVariable("contId") UUID contId,
-			@RequestBody PersonContactData contact) {
-		PersonContactData personData = contactService.updateContactData(contId, contact);
+			@RequestBody Contact contact) {
+		Contact personData = contactService.updateContactData(contId, contact);
 		ResponseDTO responseDTO = new ResponseDTO("Updated address book of Id : ", personData);
 		return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
 	}
@@ -65,7 +66,7 @@ public class PersonContactController {
 
 	@GetMapping(value = { "/sort" })
 	public ResponseEntity<ResponseDTO> sortByFirstName() {
-		List<PersonContactData> personData = contactService.sortByFirstName();
+		List<Contact> personData = contactService.sortByFirstName();
 		ResponseDTO responseDTO = new ResponseDTO("Successfull sorted the data", personData);
 		return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
 	}

@@ -5,10 +5,21 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 @Data
-public @ToString class ContactDTO {
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(JsonInclude.Include.NON_DEFAULT)
+public class ContactDTO {
+	
 	@NotNull
 	@Size(max = 65)
 	@Pattern(regexp = "^[A-Z][a-z]{2,}$", message = "Invalid firstName")
