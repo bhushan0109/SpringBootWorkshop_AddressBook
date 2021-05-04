@@ -55,9 +55,10 @@ public class Contact implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "modifiedDate")
 	private java.util.Calendar modifiedDate;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "address_id")
 
-	@OneToOne(targetEntity = Address.class, cascade = CascadeType.ALL)
-	@JoinColumn(name = "cp_fk", referencedColumnName = "id")
 	private Address address;
 
 	public Contact() {

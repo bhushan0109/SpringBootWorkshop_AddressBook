@@ -3,6 +3,7 @@ package com.finovate.service;
 import java.util.List;
 import java.util.UUID;
 
+import com.finovate.dto.ContactDTO;
 import com.finovate.model.Contact;
 
 public interface IContactService {
@@ -17,6 +18,6 @@ public interface IContactService {
 
 	Contact updateContactData(UUID contId, Contact prg);
 
-	Contact createPersonData(Contact personContactData);
+	Contact createContact(ContactDTO contactDTO);
 
 }

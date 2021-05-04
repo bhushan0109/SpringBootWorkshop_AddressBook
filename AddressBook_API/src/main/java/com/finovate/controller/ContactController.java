@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.finovate.dto.ContactDTO;
 import com.finovate.dto.ResponseDTO;
 
 import com.finovate.model.Contact;
@@ -29,8 +30,8 @@ public class ContactController {
 	private IContactService contactService;
 
 	@PostMapping("/create")
-	public ResponseEntity<ResponseDTO> createPersonData(@Valid @RequestBody Contact contact) {
-		Contact personData = contactService.createPersonData(contact);
+	public ResponseEntity<ResponseDTO> createPersonData(@Valid @RequestBody ContactDTO contact) {
+		Contact personData = contactService.createContact(contact);
 		ResponseDTO responseDTO = new ResponseDTO("Successfully created the data ", personData);
 		return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
 	}
@@ -43,7 +44,7 @@ public class ContactController {
 	}
 
 	@GetMapping("/get/{contId}")
-	public ResponseEntity<ResponseDTO> findByFastName(@PathVariable(value = "contId") UUID contId) {
+	public ResponseEntity<ResponseDTO> findById(@PathVariable(value = "contId") UUID contId) {
 		Contact personData = contactService.getContactById(contId);
 		ResponseDTO responseDTO = new ResponseDTO("Successfully got the data ", personData);
 		return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);

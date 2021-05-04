@@ -7,27 +7,30 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import com.finovate.dto.ContactDTO;
+import com.finovate.exception.AddressException;
 import com.finovate.exception.ContactException;
-
+import com.finovate.model.Address;
 import com.finovate.model.Contact;
+import com.finovate.repository.AddressRepository;
 import com.finovate.repository.ContactRepository;
 
 @Service
 public class ContactService implements IContactService {
-
+	
+	@Autowired
+	private AddressRepository addressRepository;
+	
 	@Autowired
 	private ContactRepository contactRepository;
 
 	@Override
-	public Contact createPersonData(Contact personContactData) {
-		Contact contactData = new Contact();
-		contactData.setEmailId(personContactData.getEmailId());
-		contactData.setLastName(personContactData.getLastName());
-		contactData.setMobileNumber(personContactData.getMobileNumber());
-		contactData.setFirstName(personContactData.getFirstName());
-		contactData.setAddress(personContactData.getAddress());
-		contactData.setAddress(personContactData.getAddress());
-		return contactRepository.save(contactData);
+	public Contact createContact(ContactDTO contactDTO) {
+		Contact contact= new Contact( contactDTO);
+		
+		Address address = addressRepository.findById(UUID.fromString(contactDTO.addressID)).orElseThrow(()-> new AddressException("details not found!"));
+		contact.setAddress(address);
+		return contactRepository.save(contact);
 	}
 
 	@Override
@@ -53,15 +56,17 @@ public class ContactService implements IContactService {
 	}
 
 	@Override
-	public Contact updateContactData(UUID contId, Contact prg) {
+	public Contact updateContactData(UUID contId, Contact ctn) {
 
 		Contact personContact = contactRepository.findById(contId).get();
-		personContact.setFirstName(prg.getFirstName());
-		personContact.setLastName(prg.getLastName());
-		personContact.setEmailId(prg.getEmailId());
-		personContact.setMobileNumber(prg.getMobileNumber());
-		// personContact.setPersonAddressData(prg.getPersonAddressData());
+		
+		personContact.setFirstName(ctn.getFirstName());
+		personContact.setLastName(ctn.getLastName());
+		personContact.setEmailId(ctn.getEmailId());
+		personContact.setMobileNumber(ctn.getMobileNumber());
+		personContact.setAddress(ctn.getAddress());
 		return contactRepository.save(personContact);
+
 
 	}
 

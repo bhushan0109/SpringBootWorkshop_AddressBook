@@ -36,5 +36,7 @@ public class ContactDTO {
 
 	@Pattern(regexp = "^[6-9]{1}[0-9]{9}$", message = "Invalid phone number")
 	public String mobileNumber;
+	
+	public String addressID;//for search help
 
 }
