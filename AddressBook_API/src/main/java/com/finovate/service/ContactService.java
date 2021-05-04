@@ -28,8 +28,8 @@ public class ContactService implements IContactService {
 	public Contact createContact(ContactDTO contactDTO) {
 		Contact contact= new Contact( contactDTO);
 		
-		Address address = addressRepository.findById(UUID.fromString(contactDTO.addressID)).orElseThrow(()-> new AddressException("details not found!"));
-		contact.setAddress(address);
+		//List<Address> address = (List<Address>) addressRepository.findById(UUID.fromString(contactDTO.addressID)).orElseThrow(()-> new AddressException("details not found!"));
+		//contact.setAddress(address);
 		return contactRepository.save(contact);
 	}
 
@@ -68,6 +68,18 @@ public class ContactService implements IContactService {
 		return contactRepository.save(personContact);
 
 
+	}
+public List<Address> addAddressToContact(String contactId, String addressId) {
+		
+		Address address = addressRepository.findById(UUID.fromString(addressId)).orElseThrow(()-> new AddressException("details not found!"));
+	
+		Contact contact=contactRepository.findById(UUID.fromString(contactId)).orElseThrow(()-> new AddressException("details not found!"));
+		List<Address> addresses = contact.getAddress();
+		addresses.add(address);
+		return contactRepository.save(contact).getAddress();
+		
+		
+	
 	}
 
 }

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.finovate.dto.ContactDTO;
@@ -71,4 +72,14 @@ public class ContactController {
 		ResponseDTO responseDTO = new ResponseDTO("Successfull sorted the data", personData);
 		return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
 	}
+	@GetMapping("/add/address")
+	public ResponseEntity<ResponseDTO> addAddressToContact(@RequestParam ("contactId") String contactId,@RequestParam ("addressId") String addressId){
+
+		
+		ResponseDTO responseDTO = new ResponseDTO("Created New Contact!", contactService.addAddressToContact(contactId, addressId));
+		
+		return new ResponseEntity<ResponseDTO>(responseDTO,HttpStatus.OK);
+		
+	}
+	
 }

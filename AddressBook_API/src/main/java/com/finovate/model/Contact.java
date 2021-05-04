@@ -1,6 +1,7 @@
 package com.finovate.model;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.UUID;
 
 import javax.persistence.CascadeType;
@@ -9,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -56,9 +58,10 @@ public class Contact implements Serializable {
 	@Column(name = "modifiedDate")
 	private java.util.Calendar modifiedDate;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "address_id")
-	private Address address;
+
+	private List<Address> address;
 
 	public Contact() {
 		// no argument constructor

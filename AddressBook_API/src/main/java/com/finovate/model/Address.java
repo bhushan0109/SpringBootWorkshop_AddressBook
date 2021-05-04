@@ -46,9 +46,6 @@ public @Data class Address implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "modifiedDate")
 	private java.util.Calendar modifiedDate;
-	@OneToOne(cascade = CascadeType.ALL, mappedBy = "address")
-	@JsonIgnore
-	private Contact contact;
 
 	public Address() {
 
