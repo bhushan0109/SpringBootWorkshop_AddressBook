@@ -1,6 +1,7 @@
 package com.finovate.model;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
 
@@ -20,6 +21,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.finovate.dto.ContactDTO;
 
 import lombok.AllArgsConstructor;
@@ -34,9 +36,7 @@ import lombok.ToString;
 @Entity
 @Table(name = "contact")
 public class Contact implements Serializable {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = -7136241127330655227L;
 	@Id
 	@GeneratedValue(generator = "uuid2")
@@ -58,9 +58,8 @@ public class Contact implements Serializable {
 	@Column(name = "modifiedDate")
 	private java.util.Calendar modifiedDate;
 
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "address_id")
-
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "contact")
+	@JsonIgnore
 	private List<Address> address;
 
 	public Contact() {
@@ -73,6 +72,7 @@ public class Contact implements Serializable {
 		this.lastName = contactDTO.lastName;
 		this.emailId = contactDTO.emailId;
 		this.mobileNumber = contactDTO.mobileNumber;
+		List<Address> address;
 
 	}
 

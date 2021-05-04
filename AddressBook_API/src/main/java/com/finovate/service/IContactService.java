@@ -21,6 +21,9 @@ public interface IContactService {
 
 	Contact createContact(ContactDTO contactDTO);
 
-	public List<Address> addAddressToContact(String contactId, String addressId) ;
+	public List<Address>addAddressToContact(String contactId, String addressId) ;
+
+	Contact addContactToAddress(String contactId, String addressId);
+	
 
 }

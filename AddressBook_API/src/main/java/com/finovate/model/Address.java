@@ -8,6 +8,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -46,6 +48,11 @@ public @Data class Address implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "modifiedDate")
 	private java.util.Calendar modifiedDate;
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "contact_id")
+	@JsonIgnore
+	private Contact contact;
 
 	public Address() {
 

@@ -77,9 +77,15 @@ public List<Address> addAddressToContact(String contactId, String addressId) {
 		List<Address> addresses = contact.getAddress();
 		addresses.add(address);
 		return contactRepository.save(contact).getAddress();
-		
-		
-	
 	}
+@Override
+public Contact  addContactToAddress(String contactId, String addressId) {
+    Contact contact = contactRepository.findById(UUID.fromString(contactId)).orElseThrow(()-> new AddressException("details not found!"));
+    Address address = addressRepository.findById(UUID.fromString(addressId)).orElseThrow(()-> new AddressException("details not found!"));
+
+    address.setContact(contact);
+
+    return contactRepository.save(contact);
+}
 
 }

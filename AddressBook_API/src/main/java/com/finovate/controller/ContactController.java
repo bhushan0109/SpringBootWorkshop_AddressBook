@@ -72,14 +72,23 @@ public class ContactController {
 		ResponseDTO responseDTO = new ResponseDTO("Successfull sorted the data", personData);
 		return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
 	}
-	@GetMapping("/add/address")
-	public ResponseEntity<ResponseDTO> addAddressToContact(@RequestParam ("contactId") String contactId,@RequestParam ("addressId") String addressId){
 
-		
-		ResponseDTO responseDTO = new ResponseDTO("Created New Contact!", contactService.addAddressToContact(contactId, addressId));
-		
-		return new ResponseEntity<ResponseDTO>(responseDTO,HttpStatus.OK);
-		
+	@GetMapping("/add/address")
+	public ResponseEntity<ResponseDTO> addAddressToContact(@RequestParam("contactId") String contactId,
+			@RequestParam("addressId") String addressId) {
+		ResponseDTO responseDTO = new ResponseDTO("Added New addresss into contact!",
+				contactService.addAddressToContact(contactId, addressId));
+		return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
+
 	}
-	
+
+	@GetMapping("/AddToMany")
+	public ResponseEntity<ResponseDTO> addContactToAddress(@RequestParam("contactId") String contactId,
+			@RequestParam("addressId") String addressId) {
+		ResponseDTO responseDTO = new ResponseDTO("added New Contact into addresss!",
+				contactService.addContactToAddress(contactId, addressId));
+		return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
+
+	}
+
 }

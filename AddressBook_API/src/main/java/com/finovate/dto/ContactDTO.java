@@ -1,5 +1,7 @@
 package com.finovate.dto;
 
+import java.util.List;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -7,6 +9,8 @@ import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.finovate.model.Address;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -36,7 +40,9 @@ public class ContactDTO {
 
 	@Pattern(regexp = "^[6-9]{1}[0-9]{9}$", message = "Invalid phone number")
 	public String mobileNumber;
-	
+	//private List<Address> address;
 	public String addressID;//for search help
+	@JsonProperty("address")
+	private AddressDTO addressDTO;
 
 }
